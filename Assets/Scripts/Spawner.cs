@@ -13,18 +13,11 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         SpawLoop();
+        
     }
 
-    private void SpawLoop()
-    {
-        timeBetweenSpawn += Time.deltaTime;
 
-        if (timeBetweenSpawn >= spawnTime)
-        {
-            Spawn();
-            timeBetweenSpawn = 0;
-        }
-    }
+
 
     private void Spawn()
     {
@@ -34,5 +27,24 @@ public class Spawner : MonoBehaviour
 
         Rigidbody2D rb = spawnedObstacle.GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.left * obstacleSpeed;
+
+        
+        
     }
+
+
+    private void SpawLoop()
+    {
+        
+        timeBetweenSpawn += Time.deltaTime;
+
+        if (timeBetweenSpawn >= spawnTime)
+        {
+            Spawn();
+            timeBetweenSpawn = 0;
+        }
+        
+    }
+
+    
 }

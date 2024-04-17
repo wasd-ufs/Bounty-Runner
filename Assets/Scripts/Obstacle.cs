@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if(collision.gameObject.tag == "Obstacle")
         {
             Destroy(collision.gameObject);
+
         }
+        if(transform.position.x < 0){
+            Destroy(gameObject);
+        }      
     }
 }
