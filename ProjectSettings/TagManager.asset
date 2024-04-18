@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Destructor
+  - Terrain
   layers:
   - Default
   - TransparentFX

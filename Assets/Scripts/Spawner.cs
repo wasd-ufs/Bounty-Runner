@@ -7,13 +7,19 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject[] obstacles;
 
     private float timeBetweenSpawn;
-    public float spawnTime = 2f;
-    public float obstacleSpeed = 2f;
+    public float spawnTime;
+    public float obstacleSpeed;
 
     private void Update()
     {
-        SpawLoop();
-        
+        timeBetweenSpawn += Time.deltaTime;
+
+        if (timeBetweenSpawn >= spawnTime && spawnTime > 0)
+        {
+            Spawn();
+            timeBetweenSpawn = 0;
+        }
+
     }
 
     private void Spawn()
@@ -26,20 +32,5 @@ public class Spawner : MonoBehaviour
         rb.velocity = Vector2.left * obstacleSpeed;
 
     }
-
-
-    private void SpawLoop()
-    {
-        
-        timeBetweenSpawn += Time.deltaTime;
-
-        if (timeBetweenSpawn >= spawnTime)
-        {
-            Spawn();
-            timeBetweenSpawn = 0;
-        }
-        
-    }
-
-    
+     
 }

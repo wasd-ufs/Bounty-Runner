@@ -10,19 +10,25 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform GFX;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
-    [SerializeField] private float groundDistance = 0.25f;
     [SerializeField] private float jumpTime = 0.3f;
 
     [SerializeField] private float crouchHeight = 0.5f;
+
+    private GameController gameController;
+
 
     private bool isGrounded = false;
     private bool isJumping = false;
     private float jumpTimer;
 
+    private void Start()
+    {
+        gameController = FindObjectOfType(typeof(GameController)) as GameController;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
 
         #region Jump
 
@@ -75,10 +81,21 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Obstacle")
+        if(collision.gameObject.CompareTag("Obstacle"))
         {
-            Destroy(gameObject);
-            Debug.Log("Game Over");
-        }      
+            gameController.gameOver();
+        }
+        if (collision.gameObject.CompareTag("Terrain"))
+        {
+            isGrounded = true;
+        } 
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Terrain"))
+        {
+            isGrounded = false;
+        }
     }
 }
