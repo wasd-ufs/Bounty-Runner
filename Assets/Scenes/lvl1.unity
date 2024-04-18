@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 212873149}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,8 +424,8 @@ Transform:
   m_GameObject: {fileID: 709603900}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2813, y: -5, z: 0}
-  m_LocalScale: {x: 19.807404, y: 0.85858, z: 0.85858}
+  m_LocalPosition: {x: 0.2813, y: -5.0734, z: 0}
+  m_LocalScale: {x: 19.807404, y: 1.0053113, z: 0.85858}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -441,9 +441,10 @@ GameObject:
   - component: {fileID: 793250420}
   - component: {fileID: 793250421}
   - component: {fileID: 793250422}
+  - component: {fileID: 793250423}
   m_Layer: 0
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: Destructor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,6 +551,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.52
+--- !u!114 &793250423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793250419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e61038e8c07ef41a4b5eca238e1b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &850453019
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +659,7 @@ GameObject:
   - component: {fileID: 1200376988}
   m_Layer: 0
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -831,7 +844,7 @@ Transform:
   m_GameObject: {fileID: 1394183110}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -0.1, z: 0}
+  m_LocalPosition: {x: -0.01, y: 0.09, z: 0}
   m_LocalScale: {x: 4.572611, y: 5.0213103, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -849,7 +862,7 @@ GameObject:
   - component: {fileID: 1929069902}
   m_Layer: 0
   m_Name: Player (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

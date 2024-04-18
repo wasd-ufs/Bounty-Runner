@@ -16,9 +16,6 @@ public class Spawner : MonoBehaviour
         
     }
 
-
-
-
     private void Spawn()
     {
         GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
@@ -28,8 +25,6 @@ public class Spawner : MonoBehaviour
         Rigidbody2D rb = spawnedObstacle.GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.left * obstacleSpeed;
 
-        
-        
     }
 
 
