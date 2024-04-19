@@ -1277,7 +1277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed78a17de33ae8742abf74e8fabb8345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modeDuration: 20
+  modeDuration: 10
+  mode: 0
   StartMenu: {fileID: 0}
   GameOverScreen: {fileID: 0}
   ScoreText: {fileID: 1320074074}
