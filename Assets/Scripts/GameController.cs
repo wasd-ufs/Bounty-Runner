@@ -27,10 +27,11 @@ public class GameController : MonoBehaviour
     {
 
         player.SetActive(true);
-        //Possibilidade de começar com qualquer modo
+        //Possibilidade de comeï¿½ar com qualquer modo
         modeTime = 0;
         GameMode0();
         scorepoints = 0;
+        
     }
 
     // Update is called once per frame
@@ -45,8 +46,8 @@ public class GameController : MonoBehaviour
         }
         modeTime += Time.deltaTime;
 
-        //50% de chance de mudar o modo ao atingir o limite de duração
-        // Acrescenta mais 10s caso não mude 
+        //50% de chance de mudar o modo ao atingir o limite de duraï¿½ï¿½o
+        // Acrescenta mais 10s caso nï¿½o mude 
         if (modeTime >= modeDuration)
         {
             if (Random.Range(0, 2) == 1)
@@ -72,17 +73,17 @@ public class GameController : MonoBehaviour
 
     void GameMode0()
     {
-        //Modo de jogo padrão
+        //Modo de jogo padrï¿½o
     }
 
     void GameMode1()
     {
-        //Modo mudança de gravidade
+        //Modo mudanï¿½a de gravidade
     }
 
     void GameMode2()
     {
-        //Modo padrão porém de ponta-cabeça
+        //Modo padrï¿½o porï¿½m de ponta-cabeï¿½a
     }
 
     void GameMode3()
@@ -97,19 +98,21 @@ public class GameController : MonoBehaviour
 
     public void gameOver()
     {
-        //Falta pausar a movimentação dos obstáculos
+        //Falta pausar a movimentaï¿½ï¿½o dos obstï¿½culos
+        
         player.SetActive(false);
         spawner.spawnTime = -1;
         spawner.obstacleSpeed = 0;
-        GameOverScreen.SetActive(true);
+        SceneManager.LoadScene(2);
         Debug.Log("Game Over");
     }
 
     public void RestartGame()
     {   
-        //Falta destruir obstáculos restantes
-        GameOverScreen.SetActive(false);
+        //Falta destruir obstï¿½culos restantes
+        
         StartMenu.SetActive(true);
         Start();
+        SceneManager.LoadScene(1);
     }
 }
