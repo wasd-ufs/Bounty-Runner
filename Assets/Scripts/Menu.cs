@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject StartMenu;
-    [SerializeField] private GameObject Score;
+    
     private GameController gameController;
-    private Spawner spawner;
+    
 
     private void Start()
     {
         gameController = FindObjectOfType(typeof(GameController)) as GameController;
-        spawner = FindObjectOfType(typeof(Spawner)) as Spawner;
+      
     }
 
     //Start menu
     public void play()
     {
-        spawner.spawnTime = 3f;
-        spawner.obstacleSpeed = 6;
+        
+        
         StartMenu.SetActive(false);
-        Score.SetActive(true);
+        
+        SceneManager.LoadScene(1);
     }
 
     public void options()
@@ -39,7 +41,6 @@ public class Menu : MonoBehaviour
     //Gameover menu
     public void restart()
     {
-        Score.SetActive(false);
-        gameController.RestartGame();
+        SceneManager.LoadScene(0);
     }
 }
