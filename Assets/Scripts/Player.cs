@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float crouchHeight = 0.5f;
 
     private GameController gameController;
+    [SerializeField] private Animator anim;
 
 
     private bool isGrounded = false;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         gameController = FindObjectOfType(typeof(GameController)) as GameController;
+        //anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,7 +34,10 @@ public class Player : MonoBehaviour
 
         #region Jump
 
-        if(isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded) anim.SetBool("jump", false);
+        else anim.SetBool("jump", true);
+
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
             isJumping = true;
             rb.velocity = Vector2.up * jumpForce;
@@ -64,14 +69,16 @@ public class Player : MonoBehaviour
 
         if(Input.GetAxis("Vertical") < 0 && isGrounded)
         {
-            GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
-            col.radius = 0.25f;
+            anim.SetBool("crouch", true);
+            //GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
+            //col.radius = 0.25f;
         }
         
         if(Input.GetAxis("Vertical") >= 0 && isGrounded)
         {
-            GFX.localScale = new Vector3(GFX.localScale.x, 1, GFX.localScale.z);
-            col.radius = 0.5f;
+            anim.SetBool("crouch", false);
+            //GFX.localScale = new Vector3(GFX.localScale.x, 1, GFX.localScale.z);
+            //col.radius = 0.5f;
             
         }
 
