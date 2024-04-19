@@ -18,10 +18,12 @@ public class Player : MonoBehaviour
     private GameController gameController;
     [SerializeField] private Animator anim;
 
-
+    private float speed = 10f;
+    float direction;
     private bool isGrounded = false;
     private bool isJumping = false;
     private float jumpTimer;
+    float height;
 
     private void Start()
     {
@@ -32,7 +34,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(!gameController.mode) 
+        {
         #region Jump
 
         if (isGrounded) anim.SetBool("jump", false);
@@ -84,7 +87,19 @@ public class Player : MonoBehaviour
         }
 
         #endregion
+        } else 
+        {
+            Debug.Log("Fase 2");
+            height = Input.GetAxis("Vertical");
+        }
         
+    }
+
+    // It's called by physics
+    void FixedUpdate() 
+    {
+        if(gameController.mode)
+            rb.velocity = new Vector2(rb.velocity.x, height * speed);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -92,7 +107,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("Obstacle"))
         {
             
-            gameController.gameOver();
+        //    gameController.gameOver();
     
         }
         if (collision.gameObject.CompareTag("Terrain"))

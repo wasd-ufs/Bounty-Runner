@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
 
     private float scorepoints;
 
+    public bool mode = false;
+
     [SerializeField] private GameObject StartMenu;
     [SerializeField] private GameObject GameOverScreen;
     [SerializeField] private TextMeshProUGUI ScoreText;
@@ -29,7 +31,6 @@ public class GameController : MonoBehaviour
         player.SetActive(true);
         //Possibilidade de come�ar com qualquer modo
         modeTime = 0;
-        GameMode0();
         scorepoints = 0;
         
     }
@@ -52,7 +53,8 @@ public class GameController : MonoBehaviour
         {
             if (Random.Range(0, 2) == 1)
             {
-                ChangeMode(Random.Range(0, 5));
+                mode = mode? mode : !mode;
+                Debug.Log(mode);
                 modeTime = 0;
             } else
             {
@@ -61,40 +63,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void ChangeMode(int mode)
-    {
-        if (mode == 0) GameMode0();
-        else if (mode == 1) GameMode1();
-        else if (mode == 2) GameMode2();
-        else if (mode == 3) GameMode3();
-        else GameMode4();
-
-    }
-
-    void GameMode0()
-    {
-        //Modo de jogo padr�o
-    }
-
-    void GameMode1()
-    {
-        //Modo mudan�a de gravidade
-    }
-
-    void GameMode2()
-    {
-        //Modo padr�o por�m de ponta-cabe�a
-    }
-
-    void GameMode3()
-    {
-        //Modo flappy bird
-    }
-
-    void GameMode4()
-    {
-        //Modo subir e descer a barra
-    }
 
     public void gameOver()
     {
