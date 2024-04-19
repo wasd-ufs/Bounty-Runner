@@ -162,8 +162,9 @@ MonoBehaviour:
     m_Bits: 256
   feetPos: {fileID: 1077490158}
   jumpTime: 0.3
-  crouchHeight: 0.5
   anim: {fileID: 1200376991}
+  pistol: {fileID: 2084267099}
+  bulletPrefab: {fileID: 1900897863635585721, guid: 8dbdfdc7aea3a7843b4ee3f2b3b51faf, type: 3}
 --- !u!50 &212873150
 Rigidbody2D:
   serializedVersion: 4

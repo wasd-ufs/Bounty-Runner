@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
         {
             if (Random.Range(0, 2) == 1)
             {
-                mode = mode? mode : !mode;
+                mode = !mode;
                 Debug.Log(mode);
                 modeTime = 0;
             } else

@@ -13,8 +13,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform feetPos;
     [SerializeField] private float jumpTime = 0.3f;
 
-    [SerializeField] private float crouchHeight = 0.5f;
-
     private GameController gameController;
     [SerializeField] private Animator anim;
 
@@ -24,6 +22,9 @@ public class Player : MonoBehaviour
     private bool isJumping = false;
     private float jumpTimer;
     float height;
+
+    public Transform pistol;
+    public GameObject bulletPrefab;
 
     private void Start()
     {
@@ -92,8 +93,20 @@ public class Player : MonoBehaviour
             Debug.Log("Fase 2");
             height = Input.GetAxis("Vertical");
         }
+
+        //Shooting logic
         
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
     }
+
+    void Shoot()
+    {
+        Instantiate(bulletPrefab, pistol.position, pistol.rotation);
+    }
+
 
     // It's called by physics
     void FixedUpdate() 
