@@ -19,13 +19,14 @@ public class Player : MonoBehaviour
 
     private GameController gameController;
 
+    private bool mode;
+
     private bool isGrounded = false;
     private bool isJumping = false;
     private float jumpTimer;
 
     private float speed = 10f;
     float height;
-    float direction;
 
     public Transform pistol;
     public GameObject bulletPrefab;
@@ -34,68 +35,71 @@ public class Player : MonoBehaviour
     private void Start()
     {
         gameController = FindObjectOfType(typeof(GameController)) as GameController;
-        //anim = GetComponent<Animator>();
+        mode = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!gameController.mode) 
-        {
-        #region Jump
+        if(!gameController.mode) StartCoroutine(ModeTransition());
 
-        if (isGrounded) anim.SetBool("jump", false);
-        else anim.SetBool("jump", true);
-
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (!mode || !anim.GetBool("fly")) 
         {
-            isJumping = true;
-            rb.velocity = Vector2.up * jumpForce;
-        }
+            Debug.Log("andando");
+            anim.SetBool("fly", false);
+            #region Jump
 
-        if(Input.GetButton("Jump") && isJumping)
-        {
-            if(jumpTimer < jumpTime)
+
+            if (isGrounded && Input.GetButtonDown("Jump"))
             {
+                isJumping = true;
                 rb.velocity = Vector2.up * jumpForce;
+            }
 
-                jumpTimer += Time.deltaTime;
-            } 
-            else
+            if(Input.GetButton("Jump") && isJumping)
+            {
+                if(jumpTimer < jumpTime)
+                {
+                    rb.velocity = Vector2.up * jumpForce;
+
+                    jumpTimer += Time.deltaTime;
+                } 
+                else
+                {
+                    isJumping = false;
+                }
+            }
+
+            if(Input.GetButtonUp("Jump"))
             {
                 isJumping = false;
+                jumpTimer = 0;
             }
-        }
 
-        if(Input.GetButtonUp("Jump"))
-        {
-            isJumping = false;
-            jumpTimer = 0;
-        }
+            #endregion
 
-        #endregion
+            #region Crouch
 
-        #region Crouch
-
-        if(Input.GetAxis("Vertical") < 0 && isGrounded)
-        {
-            anim.SetBool("crouch", true);
-            //GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
-            //col.radius = 0.25f;
-        }
+            if(Input.GetAxis("Vertical") < 0 && isGrounded)
+            {
+                anim.SetBool("crouch", true);
+                //GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
+                //col.radius = 0.25f;
+            }
         
-        if(Input.GetAxis("Vertical") >= 0 && isGrounded)
-        {
-            anim.SetBool("crouch", false);
-            //GFX.localScale = new Vector3(GFX.localScale.x, 1, GFX.localScale.z);
-            //col.radius = 0.5f;
+            if(Input.GetAxis("Vertical") >= 0 && isGrounded)
+            {
+                anim.SetBool("crouch", false);
+                //GFX.localScale = new Vector3(GFX.localScale.x, 1, GFX.localScale.z);
+                //col.radius = 0.5f;
             
-        }
+            }
 
-        #endregion
-        } else 
+            #endregion
+        } else if (anim.GetBool("fly"))
         {
-            Debug.Log("Fase 2");
+            Debug.Log("voando");
+            anim.SetBool("crouch", false);
             height = Input.GetAxis("Vertical");
         }
 
@@ -127,8 +131,14 @@ public class Player : MonoBehaviour
     // It's called by physics
     void FixedUpdate() 
     {
-        if(gameController.mode)
+        if(mode && anim.GetBool("fly"))
             rb.velocity = new Vector2(rb.velocity.x, height * speed);
+    }
+
+    IEnumerator ModeTransition()
+    {
+        yield return new WaitForSeconds(3f);
+        mode = gameController.mode;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -136,13 +146,21 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("Obstacle"))
         {
             
-            gameController.gameOver();
+            //gameController.gameOver();
     
         }
         if (collision.gameObject.CompareTag("Terrain"))
         {
             isGrounded = true;
-        } 
+            anim.SetBool("jump", false);
+        }
+
+        if (collision.gameObject.CompareTag("Nave"))
+        {
+            anim.SetBool("fly", true);
+            Destroy(collision.gameObject);
+            mode = true;
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -150,6 +168,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("Terrain"))
         {
             isGrounded = false;
+            anim.SetBool("jump", true);
         }
     }
 }

@@ -7,12 +7,6 @@ public class Destructor : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "Untagged"){
-           
-                Destroy(collision.gameObject);
-            
-
-        }
-          
+        Destroy(collision.gameObject);
     }
 }

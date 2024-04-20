@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Spawner spawner;
     [SerializeField] private GameObject Despawner;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject Nave;
 
 
        
@@ -54,7 +56,7 @@ public class GameController : MonoBehaviour
             if (Random.Range(0, 2) == 1)
             {
                 mode = !mode;
-                Debug.Log(mode);
+                if (mode) Instantiate(Nave, Nave.transform.position, Nave.transform.rotation);
                 modeTime = 0;
             } else
             {
@@ -63,10 +65,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    IEnumerator ModeTransition()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(Nave, Nave.transform.position, Nave.transform.rotation); 
+    }
 
     public void gameOver()
     {
-        //Falta pausar a movimenta��o dos obst�culos
         
         player.SetActive(false);
         spawner.spawnTime = -1;
