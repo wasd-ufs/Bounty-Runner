@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,24 +8,28 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private CircleCollider2D col;
+    [SerializeField] private BoxCollider2D col;
     [SerializeField] private Transform GFX;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
     [SerializeField] private float jumpTime = 0.3f;
+    [SerializeField] private Animator anim;
+    [SerializeField] private float pistolCooldown = 1f;
+
 
     private GameController gameController;
-    [SerializeField] private Animator anim;
 
-    private float speed = 10f;
-    float direction;
     private bool isGrounded = false;
     private bool isJumping = false;
     private float jumpTimer;
+
+    private float speed = 10f;
     float height;
+    float direction;
 
     public Transform pistol;
     public GameObject bulletPrefab;
+    private float shootTimer;
 
     private void Start()
     {
@@ -95,10 +100,21 @@ public class Player : MonoBehaviour
         }
 
         //Shooting logic
-        
+        shootTimer += Time.deltaTime;
         if (Input.GetButtonDown("Fire1"))
         {
-            Shoot();
+            if (shootTimer > pistolCooldown)
+            {
+                Shoot();
+                shootTimer = 0;
+            }
+        } else if (Input.GetButton("Fire1"))
+        {
+            if (shootTimer > pistolCooldown)
+            {
+                Shoot();
+                shootTimer = 0;
+            }
         }
     }
 
@@ -120,7 +136,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("Obstacle"))
         {
             
-        //    gameController.gameOver();
+            gameController.gameOver();
     
         }
         if (collision.gameObject.CompareTag("Terrain"))
