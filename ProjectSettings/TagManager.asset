@@ -8,6 +8,8 @@ TagManager:
   - Destructor
   - Terrain
   - Nave
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

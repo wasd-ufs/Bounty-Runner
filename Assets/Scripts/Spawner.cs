@@ -52,6 +52,7 @@ public class Spawner : MonoBehaviour
     private void Spawn()
     {
         int random = Random.Range(0, obstacles.Length);
+        
         if (random == 4 || random == 5){
             // se a platafroma for chamada chama os obstaculos tbm
             // de forma analoga se os obstaculos forem chamados invoca a plataforma

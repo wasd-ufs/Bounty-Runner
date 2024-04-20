@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
     private float shootTimer;
 
+    private float altura = 1;
+    private float largura = 1;
+
     private void Start()
     {
         gameController = FindObjectOfType(typeof(GameController)) as GameController;
@@ -83,16 +86,15 @@ public class Player : MonoBehaviour
             if(Input.GetAxis("Vertical") < 0 && isGrounded)
             {
                 anim.SetBool("crouch", true);
-                //GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
-                //col.radius = 0.25f;
+                GFX.localScale = new Vector3((float)(altura*0.85f), (float)(largura*0.85f), GFX.localScale.z);
+                
             }
         
             if(Input.GetAxis("Vertical") >= 0 && isGrounded)
             {
                 anim.SetBool("crouch", false);
-                //GFX.localScale = new Vector3(GFX.localScale.x, 1, GFX.localScale.z);
-                //col.radius = 0.5f;
-            
+                GFX.localScale = new Vector3(altura, largura, GFX.localScale.z);
+
             }
 
             #endregion

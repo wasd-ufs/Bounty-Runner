@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 212873150}
   jumpForce: 10
-  col: {fileID: 0}
+  col: {fileID: 1200376990}
   GFX: {fileID: 1200376987}
   groundLayer:
     serializedVersion: 2
@@ -626,6 +626,7 @@ MonoBehaviour:
   - {fileID: 1871347977471874236, guid: d14df260924f0f04a9dd7c08c7dcade7, type: 3}
   - {fileID: 14050605729434766, guid: 87c2ae2a0938ccb48989d83733000d3d, type: 3}
   - {fileID: 14050605729434766, guid: e3ff799c59335234f9882aa4f22f979d, type: 3}
+  - {fileID: 1574396553049885407, guid: ba1a1bb5b4baecf47935b589ea82f11a, type: 3}
   spawnTime: 2
   obstacleSpeed: 6
   obstaculo: {fileID: 1928402216298542352, guid: 117c70d6ceb23f5428a8815e157f60d6, type: 3}
