@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
 
         if (!mode || !anim.GetBool("fly")) 
         {
-            Debug.Log("andando");
             anim.SetBool("fly", false);
             #region Jump
 
@@ -100,7 +99,6 @@ public class Player : MonoBehaviour
             #endregion
         } else if (anim.GetBool("fly"))
         {
-            Debug.Log("voando");
             anim.SetBool("crouch", false);
             height = Input.GetAxis("Vertical");
         }

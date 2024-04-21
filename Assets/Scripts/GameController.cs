@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
             if (Random.Range(0, 2) == 1)
             {
                 mode = !mode;
-                if (mode) Instantiate(Nave, Nave.transform.position, Nave.transform.rotation);
+                if (mode) StartCoroutine(ModeTransition());
                 modeTime = 0;
             } else
             {
@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator ModeTransition()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Instantiate(Nave, Nave.transform.position, Nave.transform.rotation); 
     }
 

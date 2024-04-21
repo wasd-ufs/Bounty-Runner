@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     
     private float timeBetweenSpawn;
     private float timeBetweenSpawn2;
-    public float spawnTime = 3f;
+    public float spawnTime = 2f;
     public float obstacleSpeed = 6f;
 
     public GameObject obstaculo;
@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
         
         if(!gameController.mode)
         {
-            timeBetweenSpawn2 = 0;
+            timeBetweenSpawn2 = -1;
             timeBetweenSpawn += Time.deltaTime;
             if (timeBetweenSpawn >= spawnTime && spawnTime > 0)
             {
@@ -52,24 +52,9 @@ public class Spawner : MonoBehaviour
     private void Spawn()
     {
         int random = Random.Range(0, obstacles.Length);
-        
-        if (random == 4 || random == 5){
-            // se a platafroma for chamada chama os obstaculos tbm
-            // de forma analoga se os obstaculos forem chamados invoca a plataforma
-            if (random == 4){
-                GameObject obstacle1 = obstacles[5];
-                GameObject spawnedObstacle1 = Instantiate(obstacle1, transform.position, Quaternion.identity);
-                Rigidbody2D rb1 = spawnedObstacle1.GetComponent<Rigidbody2D>();
-                rb1.velocity = Vector2.left * obstacleSpeed;
-            }
-            else{
-                GameObject obstacle1 = obstacles[4];
-                GameObject spawnedObstacle1 = Instantiate(obstacle1, transform.position, Quaternion.identity);
-                Rigidbody2D rb1 = spawnedObstacle1.GetComponent<Rigidbody2D>();
-                rb1.velocity = Vector2.left * obstacleSpeed;
 
-            }
-        }
+        Debug.Log(random);
+        
 
         GameObject obstacle = obstacles[random];
         GameObject spawnedObstacle = Instantiate(obstacle, transform.position, Quaternion.identity);
