@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Enemy"))
         {
             
-            //gameController.gameOver();
+            gameController.gameOver();
     
         }
         if (collision.gameObject.CompareTag("Terrain"))
