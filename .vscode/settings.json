@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Projeto-WASD.sln"
+    "dotnet.defaultSolution": "Projeto-WASD2.sln"
 }
